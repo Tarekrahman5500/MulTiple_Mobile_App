@@ -5,8 +5,11 @@ import Dishdetail from "./DIshdetailComponent";
 import { View } from 'react-native';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createAppContainer} from "react-navigation";
+import Home from "./HomeComponent";
+import { createDrawerNavigator } from 'react-navigation-drawer';
 
-const MainNavigator = createStackNavigator({
+
+const MenuNavigator = createStackNavigator({
         Menu: { screen: Menu },
         Dishdetail: { screen: Dishdetail }
     },
@@ -23,6 +26,40 @@ const MainNavigator = createStackNavigator({
         }
     }
 );
+
+const HomeNavigator = createStackNavigator({
+    Home: { screen: Home }
+}, {
+    navigationOptions: ({ navigation }) => ({
+        headerStyle: {
+            backgroundColor: "#512DA8"
+        },
+        headerTitleStyle: {
+            color: "#fff"
+        },
+        headerTintColor: "#fff"
+    })
+});
+
+const MainNavigator = createDrawerNavigator({
+    Home:
+        { screen: HomeNavigator,
+            navigationOptions: {
+                title: 'Home',
+                drawerLabel: 'Home'
+            }
+        },
+    Menu:
+        { screen:MenuNavigator,
+            navigationOptions: {
+                title: 'Menu',
+                drawerLabel: 'Menu'
+            },
+        }
+}, {
+    drawerBackgroundColor: '#D1C4E9'
+});
+
 
 const AppNavigator = createAppContainer(MainNavigator);
 
