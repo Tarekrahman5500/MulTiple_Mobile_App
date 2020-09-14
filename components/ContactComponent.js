@@ -4,7 +4,7 @@ import {View, Text} from "react-native";
 
 class Contact extends Component {
     static navigationOptions = {
-        title: 'Contact Us'
+        title: ' '
     };
 
     render() {
