@@ -7,13 +7,13 @@ export const fetchComments = () => (dispatch) => {
                 if (response.ok) {
                     return response;
                 } else {
-                    let error = new Error('Error ' + response.status + ': ' + response.statusText);
+                    var error = new Error('Error ' + response.status + ': ' + response.statusText);
                     error.response = response;
                     throw error;
                 }
             },
             error => {
-                let errmess = new Error(error.message);
+                var errmess = new Error(error.message);
                 throw errmess;
             })
         .then(response => response.json())
@@ -40,13 +40,13 @@ export const fetchDishes = () => (dispatch) => {
                 if (response.ok) {
                     return response;
                 } else {
-                    let error = new Error('Error ' + response.status + ': ' + response.statusText);
+                    var error = new Error('Error ' + response.status + ': ' + response.statusText);
                     error.response = response;
                     throw error;
                 }
             },
             error => {
-                let errmess = new Error(error.message);
+                var errmess = new Error(error.message);
                 throw errmess;
             })
         .then(response => response.json())
@@ -77,13 +77,13 @@ export const fetchPromos = () => (dispatch) => {
                 if (response.ok) {
                     return response;
                 } else {
-                    let error = new Error('Error ' + response.status + ': ' + response.statusText);
+                    var error = new Error('Error ' + response.status + ': ' + response.statusText);
                     error.response = response;
                     throw error;
                 }
             },
             error => {
-                let errmess = new Error(error.message);
+                var errmess = new Error(error.message);
                 throw errmess;
             })
         .then(response => response.json())
@@ -114,13 +114,13 @@ export const fetchLeaders = () => (dispatch) => {
                 if (response.ok) {
                     return response;
                 } else {
-                    let error = new Error('Error ' + response.status + ': ' + response.statusText);
+                    var error = new Error('Error ' + response.status + ': ' + response.statusText);
                     error.response = response;
                     throw error;
                 }
             },
             error => {
-                let errmess = new Error(error.message);
+                var errmess = new Error(error.message);
                 throw errmess;
             })
         .then(response => response.json())
