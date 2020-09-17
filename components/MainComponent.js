@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Menu from './MenuComponent';
 import Dishdetail from "./DishdetailComponent";
+import Reservation  from "./ReservationComponent"
 import { View, Platform, Image, StyleSheet, SafeAreaView, ScrollView, Text} from 'react-native';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createAppContainer} from "react-navigation";
@@ -12,6 +13,7 @@ import About from "./AboutComponent";
 import {Icon} from "react-native-elements";
 import {connect} from 'react-redux';
 import { fetchDishes, fetchComments, fetchLeaders, fetchPromos} from "../redux/ActionCreators";
+
 
 const mapStateToProps = state => {
     return {
@@ -96,6 +98,28 @@ const ContactNavigator = createStackNavigator({
     })
 });
 
+const ReservationNavigator = createStackNavigator({
+    Reservation: { screen: Reservation,
+        navigationOptions: ({ navigation }) => ({
+            headerLeft: <Icon name="menu" size={24}
+                              color= 'black'
+                              onPress={ () => navigation.toggleDrawer() } />
+        })}
+}, {
+    navigationOptions: ({ navigation }) => ({
+        headerStyle: {
+            backgroundColor: "#512DA8"
+        },
+        headerTitleStyle: {
+            color: "#fff"
+        },
+        headerTintColor: "#fff",
+        headerLeft: <Icon name="menu" size={24}
+                          color= 'white'
+                          onPress={ () => navigation.toggleDrawer() } />
+    })
+})
+
 const AboutNavigator = createStackNavigator({
     About: { screen: About,
         navigationOptions: ({ navigation }) => ({
@@ -164,6 +188,7 @@ const MainNavigator = createDrawerNavigator({
                 )
             },
         },
+
     About:
         { screen:AboutNavigator,
             navigationOptions: {
@@ -173,11 +198,27 @@ const MainNavigator = createDrawerNavigator({
                     <Icon name='info-circle' type='font-awesome' size={24} color={tintColor}/>
                 )
             },
-        }
+        },
+        Reservation:
+            { screen: ReservationNavigator,
+                navigationOptions: {
+                    title: 'Reserve Table',
+                    drawerLabel: 'Reserve Table',
+                    drawerIcon: ({ tintColor, focused }) => (
+                        <Icon
+                            name='cutlery'
+                            type='font-awesome'
+                            size={24}
+                            iconStyle={{ color: tintColor }}
+                        />
+                    ),
+                }
+            }
 }, {
     drawerBackgroundColor: '#D1C4E9',
     contentComponent: CustomDrawerContentComponent
-});
+},
+    );
 
 
 const AppNavigator = createAppContainer(MainNavigator);
