@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {ScrollView, View, Text} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import {Card} from 'react-native-elements';
 import {connect} from 'react-redux';
 import {baseUrl} from "../shared/baseUrl";
@@ -18,20 +18,18 @@ function RenderItem(props) {
     const item = props.item;
 
     if (props.isLoading) {
-        return(
-            <Loading />
+        return (
+            <Loading/>
         );
-    }
-    else if (props.errMess) {
-        return(
+    } else if (props.errMess) {
+        return (
             <View>
                 <Text>{props.errMess}</Text>
             </View>
         );
-    }
-    else {
+    } else {
         if (item != null) {
-            return(
+            return (
                 <Card
                     featuredTitle={item.name}
                     featuredSubtitle={item.designation}
@@ -41,9 +39,8 @@ function RenderItem(props) {
                         {item.description}</Text>
                 </Card>
             );
-        }
-        else {
-            return(<View>
+        } else {
+            return (<View>
 
             </View>);
         }

@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import { Text, View, ScrollView, FlatList, Modal, Button } from 'react-native';
-import { StyleSheet, Dimensions } from 'react-native';
-import { Card, Icon, Rating, Input } from 'react-native-elements';
-import { connect } from 'react-redux';
-import { baseUrl } from '../shared/baseUrl';
-import { postFavorite, postComment } from '../redux/ActionCreators';
-import { DISHES } from '../shared/dishes';
-import { COMMENTS } from '../shared/comments';
+import React, {Component} from 'react';
+import {Button, Dimensions, FlatList, Modal, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Card, Icon, Input, Rating} from 'react-native-elements';
+import {connect} from 'react-redux';
+import {baseUrl} from '../shared/baseUrl';
+import {postComment, postFavorite} from '../redux/ActionCreators';
+import {DISHES} from '../shared/dishes';
+import {COMMENTS} from '../shared/comments';
 
 const mapStateToProps = state => {
     return {
@@ -24,20 +23,21 @@ const mapDispatchToProps = dispatch => ({
 function RenderDish(props) {
     const dish = props.dish;
     if (dish != null) {
-        return(
-            <Card featuredTitle={dish.name} image={{uri: baseUrl+dish.image}}>
+        return (
+            <Card featuredTitle={dish.name} image={{uri: baseUrl + dish.image}}>
                 <Text style={{margin: 10}}>
                     {dish.description}
                 </Text>
                 <View style={styles.formRow}>
-                    <Icon raised reverse name={props.favorite?'heart':'heart-o'} type='font-awesome' color='#f50' onPress={() => props.favorite ? console.log('Already favorite') : props.onPress()}/>
-                    <Icon raised reverse name={'pencil'} type='font-awesome' color='#512DA8' onPress={() => props.onComment()}/>
+                    <Icon raised reverse name={props.favorite ? 'heart' : 'heart-o'} type='font-awesome' color='#f50'
+                          onPress={() => props.favorite ? console.log('Already favorite') : props.onPress()}/>
+                    <Icon raised reverse name={'pencil'} type='font-awesome' color='#512DA8'
+                          onPress={() => props.onComment()}/>
                 </View>
             </Card>
         );
-    }
-    else {
-        return(<View>
+    } else {
+        return (<View>
 
         </View>);
     }
@@ -66,7 +66,7 @@ function RenderComments(props) {
     };
 
     return (
-        <Card title='Comments' >
+        <Card title='Comments'>
             <FlatList
                 data={comments}
                 renderItem={renderCommentItem}
@@ -115,55 +115,65 @@ class Dishdetail extends Component {
 
 
     render() {
-        const dishId = this.props.navigation.getParam('dishId','');
+        const dishId = this.props.navigation.getParam('dishId', '');
         // console.log(this.props);
-        return(
+        return (
             <ScrollView style={{flex: 1}}>
-                <RenderDish dish={this.props.dishes.dishes[+dishId]} favorite={this.props.favorites.some(el => el === dishId)} onPress={()=>this.markFavorite(dishId)}
-                            onComment={()=>this.toggleModal()}
+                <RenderDish dish={this.props.dishes.dishes[+dishId]}
+                            favorite={this.props.favorites.some(el => el === dishId)}
+                            onPress={() => this.markFavorite(dishId)}
+                            onComment={() => this.toggleModal()}
                 />
-                <RenderComments comments={this.props.comments.comments.filter((comment) => comment.dishId === dishId)} />
+                <RenderComments comments={this.props.comments.comments.filter((comment) => comment.dishId === dishId)}/>
 
                 <Modal
                     animationType={'slide'}
                     transparent={false}
                     visible={this.state.showModal}
-                    onDismiss={() => {this.toggleModal()}}
-                    onRequestClose={() => {this.toggleModal()}}>
+                    onDismiss={() => {
+                        this.toggleModal()
+                    }}
+                    onRequestClose={() => {
+                        this.toggleModal()
+                    }}>
                     <View style={styles.modal}>
                         <View>
                             <Rating type="star"
                                     ratingCount={5}
-                                    fractions = { 0 }
-                                    startingValue ={this.state.rating}
-                                    imageSize = { 38 }
-                                    onFinishRating = { rating => this.setState({ rating: rating })}
+                                    fractions={0}
+                                    startingValue={this.state.rating}
+                                    imageSize={38}
+                                    onFinishRating={rating => this.setState({rating: rating})}
                                     showRating/>
                         </View>
-                        <View style={ styles.modalText }>
-                            <Input  placeholder = 'Author'
-                                    leftIcon={
-                                        <Icon name = 'user-o' type = 'font-awesome' size = { 24 }/>
-                                    }
-                                    onChangeText = { author => this.setState({ author })}/>
+                        <View style={styles.modalText}>
+                            <Input placeholder='Author'
+                                   leftIcon={
+                                       <Icon name='user-o' type='font-awesome' size={24}/>
+                                   }
+                                   onChangeText={author => this.setState({author})}/>
                         </View>
-                        <View style={ styles.modalText }>
-                            <Input  placeholder = 'Comment'
-                                    leftIcon={
-                                        <Icon name = 'comment-o' type = 'font-awesome' size = { 24 }/>
-                                    }
-                                    onChangeText = { comment => this.setState({ comment })}/>
+                        <View style={styles.modalText}>
+                            <Input placeholder='Comment'
+                                   leftIcon={
+                                       <Icon name='comment-o' type='font-awesome' size={24}/>
+                                   }
+                                   onChangeText={comment => this.setState({comment})}/>
                         </View>
-                        <View style={ styles.modalText }>
+                        <View style={styles.modalText}>
                             <Button
-                                onPress={() => {this.handleComment(dishId)}}
+                                onPress={() => {
+                                    this.handleComment(dishId)
+                                }}
                                 color='#512DA8'
                                 title='Submit'
                             />
                         </View>
-                        <View style={ styles.modalText }>
+                        <View style={styles.modalText}>
                             <Button
-                                onPress={() => {this.toggleModal();}}
+                                onPress={() => {
+                                    this.toggleModal();
+                                }}
                                 color='#984500'
                                 title='Close'
                             />
@@ -180,7 +190,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         flex: 1,
-        marginLeft: Dimensions.get('window').width/4
+        marginLeft: Dimensions.get('window').width / 4
     },
     modalText: {
         fontSize: 18,
