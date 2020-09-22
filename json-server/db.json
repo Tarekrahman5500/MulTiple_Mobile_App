@@ -275,6 +275,22 @@
       "comment": "the test",
       "date": "2020-09-02T19:26:50.748Z",
       "id": 29
+    },
+    {
+      "dishId": 0,
+      "rating": 5,
+      "author": "Tgguu",
+      "comment": "So fgy",
+      "date": "2020-09-19T20:10:26.870Z",
+      "id": 30
+    },
+    {
+      "dishId": 0,
+      "rating": 5,
+      "author": "Tarek",
+      "comment": "Fuck",
+      "date": "2020-09-19T20:12:52.628Z",
+      "id": 31
     }
   ],
   "promotions": [
