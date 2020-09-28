@@ -3,6 +3,7 @@ import Menu from './MenuComponent';
 import Dishdetail from "./DishdetailComponent";
 import Favorites from './FavoriteComponent';
 import Reservation from "./ReservationComponent"
+import Login from "./LoginComponent";
 import {Image, Platform, SafeAreaView, ScrollView, StyleSheet, Text, View} from 'react-native';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createAppContainer} from "react-navigation";
@@ -176,6 +177,30 @@ const AboutNavigator = createStackNavigator({
     })
 });
 
+const LoginNavigator = createStackNavigator({
+    Login: {
+        screen: Login,
+        navigationOptions: ({navigation}) => ({
+            headerLeft: <Icon name="menu" size={24}
+                              color='black'
+                              onPress={() => navigation.toggleDrawer()}/>
+        })
+    }
+}, {
+    navigationOptions: ({navigation}) => ({
+        headerStyle: {
+            backgroundColor: "#512DA8"
+        },
+        headerTitleStyle: {
+            color: "#fff"
+        },
+        headerTintColor: "#fff",
+        headerLeft: <Icon name="menu" size={24}
+                          color='white'
+                          onPress={() => navigation.toggleDrawer()}/>
+    })
+})
+
 const CustomDrawerContentComponent = (props) => (
     <ScrollView>
         <SafeAreaView style={styles.container} forceInset={{top: 'always', horizontal: 'never'}}>
@@ -193,6 +218,17 @@ const CustomDrawerContentComponent = (props) => (
 );
 
 const MainNavigator = createDrawerNavigator({
+        Login:
+            {
+                screen: LoginNavigator,
+                navigationOptions: {
+                    title: 'Login',
+                    drawerLabel: 'Login',
+                    drawerIcon: ({tintColor}) => (
+                        <Icon name='sign-in' type='font-awesome' size={24} color={tintColor}/>
+                    )
+                }
+            },
         Home:
             {
                 screen: HomeNavigator,
@@ -270,6 +306,7 @@ const MainNavigator = createDrawerNavigator({
                 }
             }
     }, {
+        initialRouteName: 'Home',
         drawerBackgroundColor: '#D1C4E9',
         contentComponent: CustomDrawerContentComponent
     },
