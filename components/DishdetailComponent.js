@@ -11,12 +11,14 @@ import {
     StyleSheet,
     Text,
     View,
+    Share
 } from 'react-native';
 import {
     Card,
     Icon,
     Input,
     Rating,
+
 } from 'react-native-elements';
 import { connect } from 'react-redux';
 import * as Animatable from 'react-native-animatable';
@@ -82,6 +84,15 @@ function RenderDish({
         },
     });
 
+    const shareDish = (title, message, url) => {
+        Share.share({
+            title: title,
+            message: title + ': ' +message + ' ' + url,
+            url: url
+        }, {
+            dialogTitle: 'Share' + title
+        });
+    }
 
     if (dish != null) {
         return (
@@ -117,6 +128,14 @@ function RenderDish({
                             color="#512DA8"
                             onPress={() => openCommentForm()}
                         />
+                        <Icon
+                            raised
+                            reverse
+                            name='share'
+                            type='font-awesome'
+                            color="#51D2A8"
+                            onPress={() => shareDish(dish.name, dish.description, baseUrl + dish.image)}
+                            />
                     </View>
                 </Card>
             </Animatable.View>
